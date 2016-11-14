@@ -24,6 +24,8 @@ default: &default
 development:
   <<: *default
   database: list_of_tasks_development
+  username: list-of-tasks
+  password: 12345678
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -58,6 +60,8 @@ development:
 test:
   <<: *default
   database: list_of_tasks_test
+  username: list-of-tasks
+  password: 12345678
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,5 +85,6 @@ test:
 production:
   <<: *default
   database: list_of_tasks_production
-  username: list_of_tasks
-  password: <%= ENV['LIST_OF_TASKS_DATABASE_PASSWORD'] %>
+  username: list-of-tasks
+  password: 12345678
+#  password: <%= ENV['LIST_OF_TASKS_DATABASE_PASSWORD'] %>
