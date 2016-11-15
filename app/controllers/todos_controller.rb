@@ -1,15 +1,11 @@
 class TodosController < ApplicationController
-  def show
-    @todo = Todo.find(params[:id])
-  end
-
   def new
     @todo = Todo.new
   end
 
   def create
     @project = Project.find(params[:project_id])
-    @todo = @project.todos.create(todos_params)
+    @todo = @project.todos.create(todo_params)
     redirect_to project_path(@project)
   end
 
@@ -20,8 +16,30 @@ class TodosController < ApplicationController
     redirect_to project_path(@project)
   end
 
+  def edit
+    @project = Project.find(params[:project_id])
+    @todos = @project.todos.all
+  end
+
+  def update
+      @project = Project.find(params[:project_id])
+      @todo = @project.todos.find(params[:id])
+
+      if @todo.update(todo_params)
+        redirect_to @project
+      else
+        render 'edit'
+      end
+
+  end
+
+  def list
+    @project = Project.find(params[:project_id])
+    @todos = @project.todos.all
+  end
+
   private
-  def todos_params
+  def todo_params
       params.require(:todo).permit(:task, :is_completed)
   end
 end
